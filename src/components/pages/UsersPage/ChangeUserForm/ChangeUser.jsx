@@ -6,10 +6,14 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
 import '../../../../assets/scss/components/pages/UsersPage/changeUserForm/_changeUser.scss';
+import { useDispatch, useSelector } from "react-redux";
 
-function ChangeUser({ users, setUsers, }) {
+function ChangeUser() {
+   const users = useSelector(state => state.users);
+   const dispatch = useDispatch();
    const navigate = useNavigate();
    const { userID } = useParams();
+   
    const currentUser = users.find((user) => user.id.toString() === userID);
 
    const [localFormData, setLocalFormData] = useState({
@@ -36,7 +40,10 @@ function ChangeUser({ users, setUsers, }) {
          return user;
       });
 
-      setUsers(updatedUsers);
+      dispatch({
+         type: 'setUsers',   
+         payload: updatedUsers, 
+      });
       navigate("/");
    };
 

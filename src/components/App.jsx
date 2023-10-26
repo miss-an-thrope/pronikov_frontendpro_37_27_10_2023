@@ -1,11 +1,8 @@
 // React tools
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // React-router tools
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
-// API
-import { fetchUsersData } from '../utils/api';
 
 /* components: */
 // => static
@@ -17,10 +14,13 @@ import UserCard from './pages/UsersPage/UserCard';
 // => Forms
 import AddUser from './pages/UsersPage/AddUserForm/AddUser';
 import ChangeUser from './pages/UsersPage/ChangeUserForm/ChangeUser';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function App() {
-  const [users, setUsers] = useState([]);
+
+  const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -29,7 +29,10 @@ function App() {
 
   const handleDeleting = (id) => {
     const newUsersList = users.filter(user => user.id !== id);
-    setUsers(newUsersList);
+    dispatch({
+      type: "setUsers",
+      payload: newUsersList
+    });
   }
 
   const handleInputChange = (e) => {
@@ -40,14 +43,7 @@ function App() {
     });
   };
 
-  const fetchUsers = async () => {
-    try {
-      const users = await fetchUsersData();
-      setUsers(users);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
+
 
   const displayUsers =
     users.map(user =>
@@ -58,10 +54,6 @@ function App() {
       />
     )
     );
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   const router = createBrowserRouter([
     {
@@ -76,18 +68,13 @@ function App() {
         {
           path: '/addUser',
           element: <AddUser
-            users={users} setUsers={setUsers}
-            formData={formData} setFormData={setFormData}
+          formData={formData} setFormData={setFormData}
             handleInputChange={handleInputChange}
           />,
         },
         {
           path: '/changeUser/:userID',
-          element: <ChangeUser
-            users={users} setUsers={setUsers}
-            formData={formData} setFormData={setFormData}
-            handleInputChange={handleInputChange}
-          />,
+          element: <ChangeUser />,
         }
 
       ],

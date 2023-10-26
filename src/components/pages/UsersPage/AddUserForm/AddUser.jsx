@@ -4,15 +4,16 @@ import { useNavigate } from "react-router";
 
 // styles
 import '../../../../assets/scss/components/pages/UsersPage/addUserForm/_addUser.scss';
+import { useDispatch, useSelector } from "react-redux";
 
 function AddUser({
-   users,
-   setUsers,
    formData,
    setFormData,
    handleInputChange }) {
 
+   const users = useSelector(state => state.users);
    const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    const handleSubmit = (e) => {
       e.preventDefault();
@@ -24,7 +25,10 @@ function AddUser({
          phone: formData.phone,
       }
 
-      setUsers([...users, newUser]);
+      dispatch({
+         type: "setUsers",
+         payload: [...users, newUser]
+      });
 
       setFormData({
          name: '',
