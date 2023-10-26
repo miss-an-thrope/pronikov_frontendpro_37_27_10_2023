@@ -7,9 +7,10 @@ import { useNavigate, useParams } from "react-router";
 
 import '../../../../assets/scss/components/pages/UsersPage/changeUserForm/_changeUser.scss';
 import { useDispatch, useSelector } from "react-redux";
+import { usersActions } from "../../../../utils/usersSlice";
 
 function ChangeUser() {
-   const users = useSelector(state => state.users);
+   const users = useSelector(state => state.users.users);
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const { userID } = useParams();
@@ -40,10 +41,7 @@ function ChangeUser() {
          return user;
       });
 
-      dispatch({
-         type: 'setUsers',   
-         payload: updatedUsers, 
-      });
+      dispatch(usersActions.setUsers(updatedUsers));
       navigate("/");
    };
 

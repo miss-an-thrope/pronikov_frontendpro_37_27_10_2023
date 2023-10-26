@@ -15,12 +15,14 @@ import UserCard from './pages/UsersPage/UserCard';
 import AddUser from './pages/UsersPage/AddUserForm/AddUser';
 import ChangeUser from './pages/UsersPage/ChangeUserForm/ChangeUser';
 import { useDispatch, useSelector } from 'react-redux';
+import { usersActions } from '../utils/usersSlice';
 
 
 function App() {
 
-  const users = useSelector(state => state.users);
+  const users = useSelector(state => state.users.users);
   const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -29,10 +31,7 @@ function App() {
 
   const handleDeleting = (id) => {
     const newUsersList = users.filter(user => user.id !== id);
-    dispatch({
-      type: "setUsers",
-      payload: newUsersList
-    });
+    dispatch(usersActions.setUsers(newUsersList));
   }
 
   const handleInputChange = (e) => {
@@ -44,16 +43,16 @@ function App() {
   };
 
 
-
   const displayUsers =
-    users.map(user =>
-    (
-      <UserCard
-        key={user.id} user={user}
-        handleDeleting={handleDeleting}
-      />
-    )
-    );
+  users.map(user =>
+  (
+    <UserCard
+      key={user.id} user={user}
+      handleDeleting={handleDeleting}
+    />
+  )
+  );
+
 
   const router = createBrowserRouter([
     {

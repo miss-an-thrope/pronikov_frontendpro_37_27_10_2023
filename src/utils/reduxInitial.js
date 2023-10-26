@@ -1,23 +1,11 @@
-// Redux:
-import {createStore} from 'redux';
+// Redux-toolkit
+import { configureStore } from '@reduxjs/toolkit';
+import { usersReducer } from './usersSlice';
 
-// API:
-import { fetchUsersData } from './api';
-
-const users = await fetchUsersData();
-const initialState = {
-    users: users,
-}
-
-const usersReducer = (state = initialState, action) => {
-    switch (action.type){
-        case 'setUsers':
-            return{
-                users: action.payload
-            }
-    }
-    return state;
-}
-const store = createStore(usersReducer)
+const store = configureStore({
+   reducer: {
+      users: usersReducer
+   }
+});
 
 export default store; 
