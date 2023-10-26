@@ -1,0 +1,12 @@
+.phonebook {
+   display: grid;
+   gap: 20px;
+   
+   &__header {
+      text-align: center;
+   }
+
+   &__addUser {
+      text-align: center;
+   }
+}

@@ -1,0 +1,28 @@
+table, tr, th, td {
+   border: 1px solid;
+}
+
+th {
+   text-align: left;
+}
+
+td {
+   text-align: center;
+}
+
+.usertable {
+   min-width: 320px;
+
+   &__body {
+      
+     tr {
+       &:last-child {
+         text-align: left;
+
+         .usertable__delete {
+            text-align: left;
+         }
+       }
+     }
+   }   
+}

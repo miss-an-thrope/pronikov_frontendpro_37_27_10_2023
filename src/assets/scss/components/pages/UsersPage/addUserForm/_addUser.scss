@@ -1,0 +1,19 @@
+.addUserForm {
+   display: grid;
+   gap: 10px;
+   justify-items: center;
+   &__buttons {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      button {
+         padding: 5px;
+         border-radius: 5px;
+         border: 1px solid black;
+         &:hover {
+            background-color: black;
+            color: white;
+         }
+      }
+   }
+}

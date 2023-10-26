@@ -1,0 +1,23 @@
+.nav {
+
+   &__list {
+      display: flex;
+      gap: 30px;
+
+   }
+}
+
+// .list {&__item {}}
+
+.item {
+   &__link {
+      padding: 5px 30px;
+      border: 1px solid black;
+      border-radius: 5px;
+      
+      &:hover {
+         background-color: black;
+         color: white;
+      }
+   }
+}

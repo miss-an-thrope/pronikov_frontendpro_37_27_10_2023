@@ -1,0 +1,32 @@
+.container{
+   height: 100vh;
+   display: grid;
+   grid-template: 
+   [row1] 'header' 100px [row2]
+   [row2] 'main' 1fr [row3]
+   [row3] 'footer' 100px [end]
+   / 1fr;
+
+   // header{}
+   // main{}
+   // footer{}
+
+   .header {
+      grid-area: header;
+   }
+
+   .main {
+      grid-area: main;
+      display: grid;
+      justify-items: center;
+      align-items: center;
+
+      // &__error{}
+      // &__phonebook {}
+      // &__addUserForm {}
+   }
+
+   .footer {
+      grid-area: footer;
+   }
+}
